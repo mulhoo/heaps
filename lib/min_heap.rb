@@ -8,8 +8,6 @@ class HeapNode
 end
 
 class MinHeap
-  attr_reader :store
-
   def initialize
     @store = []
   end
@@ -67,6 +65,8 @@ class MinHeap
   # Time complexity: o1
   # Space complexity: o1
   def heap_up(index)
+    return if index == 0
+    
     parent = (index - 1 ) / 2
 
     if @store[parent].key > @store[index].key
@@ -81,7 +81,7 @@ class MinHeap
   def heap_down(index)
     child_index_left = (index * 2) + 1
     child_index_right = (index * 2) + 2
-
+    
     if @store[child_index_left].nil?
       return
     elsif @store[child_index_right].nil?

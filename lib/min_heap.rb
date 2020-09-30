@@ -8,24 +8,33 @@ class HeapNode
 end
 
 class MinHeap
+  attr_reader: :store
 
   def initialize
     @store = []
   end
 
   # This method adds a HeapNode instance to the heap
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity:ologn
+  # Space Complexity: o1
   def add(key, value = key)
-    raise NotImplementedError, "Method not implemented yet..."
+    @store << HeapNode.new(key, value)
+
+    return heap_up(@store.length - 1)
   end
 
   # This method removes and returns an element from the heap
   #   maintaining the heap structure
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity:ologn
+  # Space Complexity: o1
   def remove()
-    raise NotImplementedError, "Method not implemented yet..."
+    return nil if @store.empty?
+
+    swap(0, @store.length - 1)
+    removed = @store.pop
+    heap_down(0)
+    
+    return removed.value
   end
 
 

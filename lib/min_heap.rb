@@ -8,7 +8,7 @@ class HeapNode
 end
 
 class MinHeap
-  attr_reader: :store
+  attr_reader :store
 
   def initialize
     @store = []
@@ -32,8 +32,8 @@ class MinHeap
 
     swap(0, @store.length - 1)
     removed = @store.pop
-    heap_down(0)
-    
+
+    heap_down(0) #unless @store.empty?
     return removed.value
   end
 
@@ -53,10 +53,10 @@ class MinHeap
   end
 
   # This method returns true if the heap is empty
-  # Time complexity: ?
-  # Space complexity: ?
+  # Time complexity: o1
+  # Space complexity: o1
   def empty?
-    raise NotImplementedError, "Method not implemented yet..."
+    return @store.empty?
   end
 
   private
@@ -67,14 +67,37 @@ class MinHeap
   # Time complexity: ?
   # Space complexity: ?
   def heap_up(index)
-    
+    parent = (index - 1 ) / 2
+
+    if @store[parent].key > @store[index].key
+      swap(parent, index)
+      return heap_up(parent) while parent > 0 
+    end
   end
 
   # This helper method takes an index and 
   #  moves it up the heap if it's smaller
   #  than it's parent node.
   def heap_down(index)
-    raise NotImplementedError, "Method not implemented yet..."
+    child_index_left = (index * 2) + 1
+    child_index_right = (index * 2) + 2
+
+    if @store[child_index_left].nil?
+      return
+    elsif @store[child_index_right].nil?
+      if @store[child_index_left].key < @store[index].key 
+        swap(index, child_index_left)
+        return
+      end
+    end
+
+    if @store[child_index_left].key < @store[child_index_right].key
+      swap(index, child_index_left)
+      heap_down(child_index_left)
+    else
+      swap(index, child_index_right)
+      heap_down(child_index_right)
+    end
   end
 
   # If you want a swap method... you're welcome

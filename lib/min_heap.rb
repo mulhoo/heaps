@@ -64,8 +64,8 @@ class MinHeap
   # This helper method takes an index and
   #  moves it up the heap, if it is less than it's parent node.
   #  It could be **very** helpful for the add method.
-  # Time complexity: ?
-  # Space complexity: ?
+  # Time complexity: o1
+  # Space complexity: o1
   def heap_up(index)
     parent = (index - 1 ) / 2
 
